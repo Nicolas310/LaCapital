@@ -3,7 +3,5 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% for post in posts %} 
-<h2><a href="{% url 'detalle' pk=post.pk %}">{{ post }}</a></h2>
-{% endfor %}
+{{post.titulo}}
 {% endblock %}

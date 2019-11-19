@@ -28,4 +28,4 @@ class Carnes(models.Model):
     peso = models.IntegerField()
     precio_total = models.IntegerField()
     def __str__(self):
-        return self.title
+        return self.titulo
