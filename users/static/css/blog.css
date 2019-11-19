@@ -1,4 +1,18 @@
-body{
-    margin: 5px;
-    background-color: rgba(0, 0, 0, 0.37);
+#nicoaweonao{
+    max-width: 70%; 
+    max-height: 200px; 
+    margin-left: 15%; 
+    border-radius: 10px 10px 10px 10px; 
+    -moz-border-radius: 10px 10px 10px 10px; 
+    -webkit-border-radius: 10px 10px 10px 10px; 
+    border: 4px solid #27585e;
+}
+#jonaklo{
+    border-radius: 7px 7px 7px 7px;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    border: 4px solid #134e4b;
+    width: 40%;
+    margin-left: 30%;
+    max-height: 350px;
 }

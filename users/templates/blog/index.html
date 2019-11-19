@@ -3,8 +3,49 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% for post in posts %} 
-<a href="{% url 'nuevo' %}" class="top-menu">agregar</a>
-<h2><a href="{% url 'detalle' pk=post.pk %}">{{ post }}</a></h2>
-{% endfor %}
+
+    {% if user.tipo == 'ADMINISTRADOR' %}
+        <center>
+            <h2>Bienvenido ADMINISTRADOR: {{user}}!</h2>
+            <a href="{% url 'nuevo' %}" class="top-menu"><button class="btn btn-secondary" style="font-size: 25px;">Agregar Corte Nuevo</button></a>
+        </center>
+    {% endif %}
+
+    {% for post in posts %} 
+        <h2></h2>
+    {% endfor %}
+    {% for post in posts %} 
+    <a style="text-decoration: none;" href="{% url 'detalle' pk=post.pk %}">
+        <div class="jumbotron" style="width: 30%; float: left;margin-right: 1%;margin-left: 1%;">
+            <h1 class="display-3" style="font-size: 45px;">PRECIO: ${{ post.precio_total }}</h1>
+            {% if post.tipo == 'POLLO ENTERO'%}
+                <p class="lead"><img id="nicoaweonao" src="https://cdn.shopify.com/s/files/1/0215/9899/4504/products/pollo-entero-18-kg-aprox-pollos-100-natural-granja-magdalena-680831_600x.jpg?v=1571987104" alt="">
+            {% elif post.tipo == 'POLLO BISTEC' %}
+                <p class="lead"><img id="nicoaweonao" src="http://www.supermarket23.com/imgproducts/middle/45356.jpg" alt="">
+            {% elif post.tipo == 'POLLO TRUTRO LARGO' %}
+                <p class="lead"><img id="nicoaweonao" src="https://tremus.cl/wp-content/uploads/2019/06/trutro-largo-granja-magdalena-800-grs.jpg" alt="">
+            {% elif post.tipo == 'POLLO TRUTRO CORTO' %}
+                <p class="lead"><img id="nicoaweonao" src="https://www.ensucasa.cl/778-large_default/trutro-corto-caja-22-kilos-aprox-refrigerado.jpg" alt="">
+            {% elif post.tipo == 'PLATEADA CERDO' %}
+                <p class="lead"><img id="nicoaweonao" src="https://cdn.shopify.com/s/files/1/0215/9899/4504/products/plateada-de-lomo-de-cerdo-1-kg-aprox-cerdo-100-natural-granja-magdalena-862403_720x.png?v=1566993078" alt="">
+            {% elif post.tipo == 'SOBRECOSTILLA' %}
+                <p class="lead"><img id="nicoaweonao" src="https://r.btcdn.co/306/large/411549-sobrecostilla_santa.jpg" alt="">
+            {% elif post.tipo == 'LOMO LISO' %}
+                <p class="lead"><img id="nicoaweonao" src="https://carniceriadomicilio.cl/wp-content/uploads/2018/10/lomoliso5890.jpg" alt="">
+            {% elif post.tipo == 'Asado Carnicero' %}
+                <p class="lead"><img id="nicoaweonao" src="https://carniceriadomicilio.cl/wp-content/uploads/2018/10/petit-tender-6990.jpg" alt="">
+            {% endif %}
+            </p>
+            <hr class="my-4">
+            <p>Marca: {{ post.marca }}</p>
+            <p>Corte: {{ post.tipo }}</p>
+            <p>Kilogramos: {{ post.peso }}</p>
+            {% if user.tipo == 'ADMINISTRADOR' %}
+                <p class="lead">EDITAR</p>
+            {% elif user.tipo == 'COMPRADOR' %}
+                <p class="lead">COMPRAR</p>
+            {% endif %}
+        </div>
+    </a>
+    {% endfor %}
 {% endblock %}
