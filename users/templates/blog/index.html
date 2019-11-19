@@ -4,6 +4,7 @@
 
 {% block content %}
 {% for post in posts %} 
+<a href="{% url 'nuevo' %}" class="top-menu">agregar</a>
 <h2><a href="{% url 'detalle' pk=post.pk %}">{{ post }}</a></h2>
 {% endfor %}
 {% endblock %}
