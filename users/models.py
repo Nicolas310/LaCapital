@@ -22,6 +22,11 @@ class Carnes(models.Model):
         ('Asado Carnicero,','Asado Carnicero,'),
     )
     tipo = models.CharField(max_length=80,choices=TIPO,default='POLLO ENTERO')
+    ESTADO = (
+        ('DISPONIBLE','DISPONIBLE'),
+        ('VENDIDO','VENDIDO'),
+    )
+    estado = models.CharField(max_length=80,choices=ESTADO,default='DISPONIBLE')
     titulo = models.CharField(max_length=20)
     marca = models.CharField(max_length=20)
     precio_kilo = models.IntegerField()

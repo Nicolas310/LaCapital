@@ -37,7 +37,7 @@
         <button style="font-size: 30px;" class="btn btn-success">EDITAR</button>
       </a>
       {% elif user.tipo == 'COMPRADOR' %}
-      <a href="{% url 'editar' pk=post.pk %}">
+      <a href="{% url 'comprar' pk=post.pk %}">
         <button style="font-size: 30px;" class="btn btn-success">COMPRAR</button>
       </a>
       {% endif %}

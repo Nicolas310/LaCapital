@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<style>
+    label{
+        font-size: 20px;
+        color: rgb(95, 200, 214);
+        margin-right: 6px;
+        }
+    input{
+        font-size: 20px;
+    }
+    select{
+        font-size: 20px;
+    }
+    h2{
+        color: rgb(95, 200, 214); 
+    }
+</style>
+    <div class="jumbotron" style="text-align: center; max-width: 60%;margin-left: 20%;">
+        <h2>Comprar Corte</h2>
+        <hr>
+        <center><h3>¿Estas Seguro de Realizar tu Compra?</h3></center>
+        
+        <hr>
+        <form method="POST" class="post-form">{% csrf_token %}
+            <div style="display:none;">
+            {{ form.as_p }}
+        </div>
+            <button type="submit" class="btn btn-secondary" style="font-size: 25px;">Guardar</button>
+        </form>
+    </div>
+{% endblock %}

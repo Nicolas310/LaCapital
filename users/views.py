@@ -5,7 +5,10 @@ from django.shortcuts import redirect
 
 # Create your views here.
 def index(request):
-    posts = Carnes.objects.order_by('-pk')
+    posts = Carnes.objects.filter(estado='DISPONIBLE').order_by('-pk')
+    return render(request, 'blog/index.html', {'posts': posts})
+def vendido(request):
+    posts = Carnes.objects.filter(estado='VENDIDO').order_by('-pk')
     return render(request, 'blog/index.html', {'posts': posts})
 def detalle(request, pk):
     post = get_object_or_404(Carnes, pk=pk)
@@ -15,21 +18,24 @@ def nuevo(request):
         form = CarnesForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            post.estado = 'DISPONIBLE'
             post.save()
             return redirect('detalle', pk=post.pk)
     else:
         form = CarnesForm()
     return render(request, 'blog/nuevo.html', {'form': form})
-def registro(request):
+def comprar(request, pk):
+    post = get_object_or_404(Carnes, pk=pk)
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = CarnesForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
+            post.estado = 'VENDIDO'
             post.save()
-            return redirect('/', pk=post.pk)
+            return redirect('detalle', pk=post.pk)
     else:
-        form = CustomUserCreationForm()
-    return render(request, 'registration/registro.html', {'form': form})
+        form = CarnesForm(instance=post)
+    return render(request, 'blog/comprar.html', {'form': form} ,{'post': post})
 def editar(request, pk):
     post = get_object_or_404(Carnes, pk=pk)
     if request.method == "POST":
@@ -41,3 +47,13 @@ def editar(request, pk):
     else:
         form = CarnesForm(instance=post)
     return render(request, 'blog/editar.html', {'form': form})
+def registro(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('/', pk=post.pk)
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/registro.html', {'form': form})

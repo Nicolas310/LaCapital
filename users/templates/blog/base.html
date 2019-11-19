@@ -18,9 +18,20 @@
         
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="/">Disponibles <span class="sr-only">(current)</span></a>
+              </li>
+              {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
               </li>
+              {% endif %}
+              {% if user.tipo == 'ADMINISTRADOR' %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'vendido' %}">Ventas <span class="sr-only">(current)</span></a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'registro' %}">Registrate</a>
               </li>
